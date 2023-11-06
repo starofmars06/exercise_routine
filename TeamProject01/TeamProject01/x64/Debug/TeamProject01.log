@@ -1,0 +1,3 @@
+﻿  TeamProject.c
+C:\Users\hyuns\source\repos\week10\team\TeamProject01\TeamProject01\TeamProject.c(36,26): warning C4244: '=': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  TeamProject01.vcxproj -> C:\Users\hyuns\source\repos\week10\team\TeamProject01\x64\Debug\TeamProject01.exe
