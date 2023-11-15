@@ -2,6 +2,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <time.h>
 
 #define ANSI_COLOR_RED      "\x1b[31m"
 #define ANSI_COLOR_GREEN    "\x1b[32m"
@@ -11,7 +12,46 @@
 #define ANSI_COLOR_RESET    "\x1b[0m"
 
 char name[20];
+int date;
 
+//*************메인 기능*************
+char* save_load_name();
+void bmi_calculation(char* name);
+void daily_routine(char* name);
+
+//+++++++++++++추가 기능+++++++++++++
+void select_menu();													//부가 기능 선택 메뉴
+
+int date_to_file_name();											//년도날짜를 txt 제목으로 사용할 수 있도록 변환한 함수
+void bmi_save(int date, int height, int weight, float bmi);			//bmi 및 신체 기록 저장하는 함수
+void bmi_load(int date);											//신체 기록 txt 파일 불러오는 함수
+void bmi_monthly_record();											//이번달 기준 누적 기록 보여주기
+
+
+//--------------------------------------------------------------
+int main() {
+	//1. 이름 저장하고 불러오기
+	save_load_name();
+
+	//2. BMI 측정(신체 정보 입력)
+	bmi_calculation(name);
+
+	//3. 운동 종목 선택하기
+	daily_routine(name);
+
+	// 누적된 기록 확인하기(부가 기능)
+	select_menu();
+
+
+	return 0;
+}
+
+//-----------------------------------------------------------
+//
+// 메인 기능 함수
+//
+//-----------------------------------------------------------
+//1. 이름 저장하고 불러오는 함수
 char* save_load_name() {
 	FILE* file;
 
@@ -70,14 +110,15 @@ char* save_load_name() {
 	return name;
 }
 
+//2. 신체 정보 입력 및 bmi 측정
 void bmi_calculation(char* name) {
 	int height, weight;
 	float fatness;      //비만도
 
 	//신체 정보 입력(키, 몸무게)
-	printf("\n*******************\n");            //구분선
+	printf("\n*******************\n\n");            //구분선
 	printf("반갑습니다, %s님!\n", name);            //환영문구
-	printf("신체 정보를 입력해주세요.\n");
+	printf("신체 정보를 입력해주세요.\n\n");
 
 	printf("키는 얼마입니까?(cm) : ");
 	scanf("%d", &height);
@@ -194,9 +235,19 @@ void bmi_calculation(char* name) {
 
 		printf("\n체중 감량을 위해 [체지방 감소] 운동을 권장합니다.\n" ANSI_COLOR_RESET);
 	}
+	
 
+	//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+	//신체 정보 기록하기
+
+	//오늘 날짜 기록하기
+	date = date_to_file_name();
+
+	//오늘 날짜, 키, 몸무게, bmi 저장하기.
+	bmi_save(date, height, weight, fatness);
 }
 
+//3. 운동 종목 선택
 void daily_routine(char* name) {
 	int choice;   // 선택값
 	int choice1, choice2, choice3, choice4; // 운동 목표에 따른 운동 종류 선택값
@@ -380,14 +431,287 @@ void daily_routine(char* name) {
 	}
 }
 
-int main() {
-	//1. 이름 저장하고 불러오기
-	save_load_name();
+//***********************************************************
+//
+// 부가 기능 
+//
+//***********************************************************
 
-	//2. BMI 측정(신체 정보 입력)
-	bmi_calculation(name);
+// 메뉴 선택을 통한 기능 선택
+void select_menu() {
+	int select_menu;
+	int selected_date, year, month, day;
 
-	//3. 운동 종목 선택하기
-	daily_routine(name);
+	printf("\n*******************\n\n");
 
+	printf("어떤 기능을 선택하시겠습니까?\n");
+	printf("1. 신체 정보 기록 확인하기(날짜 선택)     2. 이번달 신체 기록 확인하기   \n");
+	printf("3. 운동 기록 확인하기                     4. 누적 운동 기록 확인하기   \n\n");
+
+	scanf("%d", &select_menu);
+
+	printf("\n*******************\n\n");
+
+	if (select_menu == 1) {
+		printf("확인하고 싶은 날짜를 입력해주세요 (YYYY.MM.DD): ");
+		scanf("%d.%d.%d", &year, &month, &day);
+
+		selected_date = (year * 10000 + month * 100 + day);
+
+		bmi_load(selected_date);
+	}
+	else if (select_menu == 3) {
+		bmi_monthly_record();
+	}
+
+}
+
+
+// bmi 신체 정보 기록을 위해서
+// 텍스트 파일 제목을 날짜로 저장하고자 함.
+void bmi_save(int date, int height, int weight, float bmi) {
+	char filename[20];
+	FILE* fbmi;
+
+	//텍스트 파일 이름 지정
+	sprintf(filename, "%d", date);
+	strcat(filename, ".txt");
+
+	fbmi = fopen(filename, "w");
+
+	//텍스트 파일에 bmi 정보 저장
+	fprintf(fbmi, "날짜: %d\n", date);
+	fprintf(fbmi, "신장: %d cm\n", height);
+	fprintf(fbmi, "체중: %d kg\n", weight);
+	fprintf(fbmi, "BMI: %.2f\n", bmi);
+
+	// 파일 닫기
+	fclose(fbmi);
+
+	printf("BMI 정보가 성공적으로 저장되었습니다.\n");
+}
+
+// bmi 정보, 기록한 정보 불러오기
+void bmi_load(int selected_date) {
+	char filename[20];
+	FILE* fbmi;
+
+	int loadedDate;
+	int loadedHeight, loadedWeight;
+	float loadedBMI;
+
+	int fatness;
+
+	// 텍스트 파일 이름 지정
+	sprintf(filename, "%d.txt", selected_date);
+
+	fbmi = fopen(filename, "r");
+
+	if (fbmi == NULL) {
+		printf("해당 날짜에는 신체정보를 기록하지 않았습니다.\n");
+		return;
+	}
+
+
+	// 읽어온 데이터 출력
+	fscanf(fbmi, "날짜: %d\n", &loadedDate);
+	fscanf(fbmi, "신장: %d cm\n", &loadedHeight);
+	fscanf(fbmi, "체중: %d kg\n", &loadedWeight);
+	fscanf(fbmi, "BMI: %f\n", &loadedBMI);
+
+	printf("\n");
+	printf("신장: %d cm\n", loadedHeight);
+	printf("체중: %d kg\n", loadedWeight);
+	printf("BMI: %.2f\n", loadedBMI);
+
+	//bmi 결과에 대해서
+	//18.5 이하 저체중, 18.5~22.9 정상, 23.0~24.9 과체중, 25 이상 비만
+	fatness = loadedBMI;
+
+	if (fatness < 18.5) {
+		printf(ANSI_COLOR_YELLOW ".........<저체중>\n" ANSI_COLOR_RESET);
+	}
+	else if (fatness < 23.0) {
+		printf(ANSI_COLOR_GREEN ".........<정상체중>\n" ANSI_COLOR_RESET);
+	}
+	else if (fatness < 25.0) {
+		printf(ANSI_COLOR_BLUE ".........<과체중>\n" ANSI_COLOR_RESET);
+	}
+	else if (fatness < 30.0) {
+		printf(ANSI_COLOR_MAGENTA ".........<비만>\n" ANSI_COLOR_RESET);
+	}
+	else {
+		printf(ANSI_COLOR_RED ".........<고도비만>\n" ANSI_COLOR_RESET);
+	}
+
+
+	// 파일 닫기
+	fclose(fbmi);
+}
+
+//이번달 누적 기록 들고오기
+void bmi_monthly_record() {
+	char filename[20];
+	FILE* fbmi;
+
+	int loadedDate;
+	int loadedHeight, loadedWeight;
+	float loadedBMI;
+
+	int fatness;
+	int foundRecords = 0;  // 이전에 저장된 기록을 찾았는지 여부
+
+	int count = 0;
+
+
+	//이번달 시작 날짜 구하기
+	int year, month, day, start_day;
+	struct tm* t;
+	time_t timer;
+
+	timer = time(NULL);
+	t = localtime(&timer);
+
+	year = t->tm_year + 1900;
+	month = t->tm_mon + 1;
+	day = t->tm_mday;
+	start_day = 01;
+
+	int today = (year * 10000 + month * 100 + day);
+	int this_month_start_date = (year * 10000 + month * 100 + start_day);
+	//------------------------------------------
+	printf("\n********** 기록된 정보 **********\n");
+
+	for (int i = this_month_start_date; i <= today; i++) {
+		// 텍스트 파일 이름 지정
+		sprintf(filename, "%d.txt", i);
+
+		fbmi = fopen(filename, "r");
+
+		if (fbmi != NULL) {
+			// 읽어온 데이터 출력
+			fscanf(fbmi, "날짜: %d\n", &loadedDate);
+			fscanf(fbmi, "신장: %d cm\n", &loadedHeight);
+			fscanf(fbmi, "체중: %d kg\n", &loadedWeight);
+			fscanf(fbmi, "BMI: %f\n", &loadedBMI);
+
+			printf("\n");
+			// loadedDate를 연도, 월, 일로 분리하여 출력
+			int back_to_year = loadedDate / 10000;
+			int back_to_month = (loadedDate % 10000) / 100;
+			int back_to_day = loadedDate % 100;
+			
+
+			//printf("체중: %d kg\n", loadedWeight);
+			//printf("BMI: %.2f\n", loadedBMI);
+
+			// bmi 결과에 대해서
+			// 18.5 이하 저체중, 18.5~22.9 정상, 23.0~24.9 과체중, 25 이상 비만
+			fatness = loadedBMI;
+
+			printf("┃ ");
+			printf("%d년 %d월 %d일\n", back_to_year, back_to_month, back_to_day);
+
+			if (fatness < 18.5) {
+				printf("┗");
+				printf("━━━━");
+				printf("┓");
+
+				printf(ANSI_COLOR_YELLOW "%d㎏......<저체중>", loadedWeight);
+				printf("\n" ANSI_COLOR_RESET);
+
+				printf("┏");
+				printf("━━━━");
+				printf("┛\n");
+				printf("┃ ");
+
+
+			}
+			else if (fatness < 23.0) {
+				printf("┗");
+				printf("━━━━━━━━");
+				printf("┓");
+
+				printf(ANSI_COLOR_GREEN "%d㎏......<정상체중>", loadedWeight);
+				printf("\n" ANSI_COLOR_RESET);
+
+				printf("┏");
+				printf("━━━━━━━━");
+				printf("┛\n");
+				printf("┃ ");
+			}
+			else if (fatness < 25.0) {
+				printf("┗");
+				printf("━━━━━━━━━━━━━");
+				printf("┓");
+
+				printf(ANSI_COLOR_BLUE "%d㎏......<과체중>", loadedWeight);
+				printf("\n" ANSI_COLOR_RESET);
+
+				printf("┏");
+				printf("━━━━━━━━━━━━━");
+				printf("┛\n");
+				printf("┃ ");
+
+			}
+			else if (fatness < 30.0) {
+				printf("┗");
+				printf("━━━━━━━━━━━━━━━━━━");
+				printf("┓");
+
+				printf(ANSI_COLOR_MAGENTA "%d㎏......<비만>", loadedWeight);
+				printf("\n" ANSI_COLOR_RESET);
+
+
+				printf("┏");
+				printf("━━━━━━━━━━━━━━━━━━");
+				printf("┛\n");
+				printf("┃ ");
+			}
+			else {
+				printf("┗");
+				printf("━━━━━━━━━━━━━━━━━━━━━━━");
+				printf("┓");
+
+				printf(ANSI_COLOR_RED "%d㎏......<고도비만>", loadedWeight);
+				printf("\n" ANSI_COLOR_RESET);
+
+				printf("┏");
+				printf("━━━━━━━━━━━━━━━━━━━━━━━");
+				printf("┛\n");
+				printf("┃ ");
+			}
+
+			fclose(fbmi);
+			foundRecords = 1;  // 기록을 찾았음을 표시
+
+			count++;
+		}
+	}
+
+	if (!foundRecords) {
+		printf("선택한 날짜 이전에 기록된 정보가 없습니다.\n");
+	}
+
+	//-----------------------------------------
+	printf("\n\n이번 달에는 총 %d 번 신체기록을 하셨습니다.\n", count);
+
+
+}
+
+// 파일 이름으로 쓸 수 있도록, 날짜 정보 변환하기
+int date_to_file_name()
+{
+	int year, month, day;
+	struct tm* t;
+	time_t timer;
+
+	timer = time(NULL);
+	t = localtime(&timer);
+
+	year = t->tm_year + 1900;
+	month = t->tm_mon + 1;
+	day = t->tm_mday;
+
+	return (year * 10000 + month * 100 + day);
 }
