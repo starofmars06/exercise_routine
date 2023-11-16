@@ -460,7 +460,7 @@ void select_menu() {
 
 		bmi_load(selected_date);
 	}
-	else if (select_menu == 3) {
+	else if (select_menu == 2) {
 		bmi_monthly_record();
 	}
 
