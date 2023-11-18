@@ -302,7 +302,7 @@ void daily_routine(char* name) {
 			// 상세 설명
 			strcpy(level, "상/중/하");
 			cal = 30;
-			strcpy(url, "https://");
+			strcpy(url, "운동 효과를 높이기 위해 바르게 걷는 방법\n	   https://youtu.be/rVoB0heVow0?si=QsUqPhefBghZ_jDy");
 
 			exercise_details(exercise_name, descr, time, level, cal, url);
 			break;
@@ -313,7 +313,7 @@ void daily_routine(char* name) {
 			// 상세 설명
 			strcpy(level, "상/중/하");
 			cal = 30;
-			strcpy(url, "https://");
+			strcpy(url, "등산할 때 올바른 보행법\n	   https://youtu.be/NTEaUa8SSpM?si=maVK23YRfzmlr1b-");
 
 			exercise_details(exercise_name, descr, time, level, cal, url);
 			break;
@@ -324,7 +324,7 @@ void daily_routine(char* name) {
 			// 상세 설명
 			strcpy(level, "상/중/하");
 			cal = 30;
-			strcpy(url, "https://");
+			strcpy(url, "줄넘기 초보자를 위한 간단한 설명\n	   https://youtu.be/_yWerNDS2AQ?si=KbnH8guZX_JJ0Oa1");
 
 			exercise_details(exercise_name, descr, time, level, cal, url);
 			break;
@@ -335,7 +335,7 @@ void daily_routine(char* name) {
 			// 상세 설명
 			strcpy(level, "상/중/하");
 			cal = 30;
-			strcpy(url, "https://");
+			strcpy(url, "배드민턴 입문자용 기초 설명\n	   https://youtu.be/giXK9YAeJEI?si=nKTfS_rM72A3MSHe");
 
 			exercise_details(exercise_name, descr, time, level, cal, url);
 		case 5:
@@ -345,7 +345,7 @@ void daily_routine(char* name) {
 			// 상세 설명
 			strcpy(level, "상/중/하");
 			cal = 30;
-			strcpy(url, "https://");
+			strcpy(url, "효과적으로 계단오르기 운동 하는 방법\n	   https://youtu.be/5K_-Bz9VfHw?si=QPudFsNtw9pQxmgs");
 
 			exercise_details(exercise_name, descr, time, level, cal, url);
 			break;
@@ -356,7 +356,7 @@ void daily_routine(char* name) {
 			// 상세 설명
 			strcpy(level, "상/중/하");
 			cal = 30;
-			strcpy(url, "https://");
+			strcpy(url, "인터벌트레이닝의 방법과 효과\n	   https://youtu.be/RKcfpPNlMvE?si=z6nWkIUmKrZNBclu");
 
 			exercise_details(exercise_name, descr, time, level, cal, url);
 			break;
@@ -378,7 +378,7 @@ void daily_routine(char* name) {
 			// 상세 설명
 			strcpy(level, "상/중/하");
 			cal = 30;
-			strcpy(url, "https://");
+			strcpy(url, "반달자세 하는 방법\n	   https://youtu.be/E93q2CDmp14?si=O0PUMTEwNRqx9RbS");
 
 			exercise_details(exercise_name, descr, time, level, cal, url);
 			break;
@@ -389,7 +389,7 @@ void daily_routine(char* name) {
 			// 상세 설명
 			strcpy(level, "상/중/하");
 			cal = 30;
-			strcpy(url, "https://");
+			strcpy(url, 독수리자세 하는 방법\n	   "https://youtu.be/0yVcCuc_uGE?si=iWOupRitjG_7uKSP");
 
 			exercise_details(exercise_name, descr, time, level, cal, url);
 			break;
@@ -401,7 +401,7 @@ void daily_routine(char* name) {
 			// 상세 설명
 			strcpy(level, "상/중/하");
 			cal = 30;
-			strcpy(url, "https://");
+			strcpy(url, "나무자세 하는 방법\n	   https://youtu.be/TptsloulelU?si=EyVohJpO7mhmq-H2");
 
 			exercise_details(exercise_name, descr, time, level, cal, url);
 			break;
@@ -412,7 +412,7 @@ void daily_routine(char* name) {
 			// 상세 설명
 			strcpy(level, "상/중/하");
 			cal = 30;
-			strcpy(url, "https://");
+			strcpy(url, "집에서 하는 전신필라테스 20가지 동작\n	   https://youtu.be/L5QnCr_vdJE?si=miiZhZyb5_M2xbc3");
 
 			exercise_details(exercise_name, descr, time, level, cal, url);
 			break;
@@ -423,7 +423,7 @@ void daily_routine(char* name) {
 			// 상세 설명
 			strcpy(level, "상/중/하");
 			cal = 30;
-			strcpy(url, "https://");
+			strcpy(url, "다리 찢기 늘리는 방법\n	   https://youtu.be/MYdr0deU5N4?si=Ez9h_3KQExrR102M");
 
 			exercise_details(exercise_name, descr, time, level, cal, url);
 			break;
@@ -445,7 +445,7 @@ void daily_routine(char* name) {
 			// 상세 설명
 			strcpy(level, "상/중/하");
 			cal = 30;
-			strcpy(url, "https://");
+			strcpy(url, "스쿼트 올바른 자세 배우기\n	   https://youtu.be/fy9URmTqNio?si=8MubMXaGBXLmGgB8");
 
 			exercise_details(exercise_name, descr, time, level, cal, url);
 			break;
@@ -456,7 +456,7 @@ void daily_routine(char* name) {
 			// 상세 설명
 			strcpy(level, "상/중/하");
 			cal = 30;
-			strcpy(url, "https://");
+			strcpy(url, "데드리프트 올바르게 하는 방법 배우기\n	   https://youtu.be/EBjYQeeBI-0?si=fZ1gasghn-ZRCTge");
 
 			exercise_details(exercise_name, descr, time, level, cal, url);
 			break;
@@ -467,7 +467,7 @@ void daily_routine(char* name) {
 			// 상세 설명
 			strcpy(level, "상/중/하");
 			cal = 30;
-			strcpy(url, "https://");
+			strcpy(url, "벤치프레스 올바르게 하는 방법 배우기\n	   https://youtu.be/0DsXTSHo3lU?si=_qOT7u-ZiMAYnVP5");
 
 			exercise_details(exercise_name, descr, time, level, cal, url);
 			break;
@@ -478,7 +478,7 @@ void daily_routine(char* name) {
 			// 상세 설명
 			strcpy(level, "상/중/하");
 			cal = 30;
-			strcpy(url, "https://");
+			strcpy(url, "팔굽혀펴기 자세 및 효과 배우기\n	   https://youtu.be/-_DUjHxgmWk?si=o1ukxpoBJRzOdseA");
 
 			exercise_details(exercise_name, descr, time, level, cal, url);
 			break;
@@ -489,7 +489,7 @@ void daily_routine(char* name) {
 			// 상세 설명
 			strcpy(level, "상/중/하");
 			cal = 30;
-			strcpy(url, "https://");
+			strcpy(url, "윗몸일으키기 통증 없이 올바르게 하는 방법 배우기\n	   https://youtu.be/kWKqlIKnIG0?si=X6-hqBvlAK1uLCEY");
 
 			exercise_details(exercise_name, descr, time, level, cal, url);
 			break;
@@ -500,7 +500,7 @@ void daily_routine(char* name) {
 			// 상세 설명
 			strcpy(level, "상/중/하");
 			cal = 30;
-			strcpy(url, "https://");
+			strcpy(url, "풀업 자세 배우기\n	   https://youtu.be/nWhS28U6bCY?si=S3j7U4EYrv-XAOcY");
 
 			exercise_details(exercise_name, descr, time, level, cal, url);
 			break;
@@ -522,7 +522,7 @@ void daily_routine(char* name) {
 			// 상세 설명
 			strcpy(level, "상/중/하");
 			cal = 30;
-			strcpy(url, "https://");
+			strcpy(url, "운동 효과 높이는 조깅 방법\n	   https://youtu.be/4OZKcJ_Ze6E?si=Rdgk6ANeKmPd83Zy");
 
 			exercise_details(exercise_name, descr, time, level, cal, url);
 			break;
@@ -533,7 +533,7 @@ void daily_routine(char* name) {
 			// 상세 설명
 			strcpy(level, "상/중/하");
 			cal = 30;
-			strcpy(url, "https://");
+			strcpy(url, "효율적으로 달릴 수 있는 자세와 호흡 방법\n	   https://youtu.be/th7Wi9DsmFo?si=eX_XuLisgdLFsY82");
 
 			exercise_details(exercise_name, descr, time, level, cal, url);
 			break;
@@ -544,7 +544,7 @@ void daily_routine(char* name) {
 			// 상세 설명
 			strcpy(level, "상/중/하");
 			cal = 30;
-			strcpy(url, "https://");
+			strcpy(url, "자전거 타는 방법 배우기\n	   https://youtu.be/M9vqn0R9HmE?si=hJxua2LB7Fh-MP-L");
 
 			exercise_details(exercise_name, descr, time, level, cal, url);
 			break;
@@ -555,7 +555,7 @@ void daily_routine(char* name) {
 			// 상세 설명
 			strcpy(level, "상/중/하");
 			cal = 30;
-			strcpy(url, "https://");
+			strcpy(url, "여러 가지 수영법 배우기\n	   https://youtu.be/7PqEAls1wjE?si=tx4FXGP6qx7CZusA");
 
 			exercise_details(exercise_name, descr, time, level, cal, url);
 			break;
@@ -566,7 +566,7 @@ void daily_routine(char* name) {
 			// 상세 설명
 			strcpy(level, "상/중/하");
 			cal = 30;
-			strcpy(url, "https://");
+			strcpy(url, "크로스핏 기본 동작 배우기\n	   https://youtu.be/7oGstYEb-_k?si=gYyBOccRRkt03wRP");
 
 			exercise_details(exercise_name, descr, time, level, cal, url);
 			break;
@@ -577,7 +577,7 @@ void daily_routine(char* name) {
 			// 상세 설명
 			strcpy(level, "상/중/하");
 			cal = 30;
-			strcpy(url, "https://");
+			strcpy(url, "기본 원투 하는 방법 배우기\n	   https://youtu.be/4THFtd5K5TI?si=rD-dObdshI1DpgJJ");
 
 			exercise_details(exercise_name, descr, time, level, cal, url);
 			break;
