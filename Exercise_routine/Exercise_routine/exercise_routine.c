@@ -1,335 +1,359 @@
 #include "common.h"
 
-//3. ¿îµ¿ Á¾¸ñ ¼±ÅÃ
+//3. ìš´ë™ ì¢…ëª© ì„ íƒ
 void daily_routine(char* name) {
-	int choice;   // ¼±ÅÃ°ª
-	int choice1, choice2, choice3, choice4; // ¿îµ¿ ¸ñÇ¥¿¡ µû¸¥ ¿îµ¿ Á¾·ù ¼±ÅÃ°ª
+	int choice;   // ì„ íƒê°’
+	int choice1, choice2, choice3, choice4; // ìš´ë™ ëª©í‘œì— ë”°ë¥¸ ìš´ë™ ì¢…ë¥˜ ì„ íƒê°’
 	int c;
 
-	char exercise_name[MAX_STRING_LENGTH]; // ¿îµ¿ ÀÌ¸§
-	char descr[MAX_STRING_LENGTH];     // ¿îµ¿ ¼³¸í
-	char time[MAX_STRING_LENGTH];      // ¿îµ¿ ½Ã°£
-	char level[MAX_STRING_LENGTH];     // ¿îµ¿ °­µµ
-	int cal;                           // ¿¹»ó ¼Ò¸ğ Ä®·Î¸®
-	char url[MAX_STRING_LENGTH];       // ¿îµ¿ ¿µ»ó ÁÖ¼Ò
+	char exercise_name[MAX_STRING_LENGTH]; // ìš´ë™ ì´ë¦„
+	char descr[MAX_STRING_LENGTH];     // ìš´ë™ ì„¤ëª…
+	char time[MAX_STRING_LENGTH];      // ìš´ë™ ì‹œê°„
+	char level[MAX_STRING_LENGTH];     // ìš´ë™ ê°•ë„
+	int cal;                           // ì˜ˆìƒ ì†Œëª¨ ì¹¼ë¡œë¦¬
+	int flex:                          // ìš´ë™ ëª©í‘œê°€ ìœ ì—°ì„±ì¸ì§€ ì•„ë‹Œì§€ íŒë³„
+	char url[MAX_STRING_LENGTH];       // ìš´ë™ ì˜ìƒ ì£¼ì†Œ
 
 	printf("\n*******************\n");
-	printf("°ü½É ÀÖ´Â ¿îµ¿ ¸ñÇ¥¸¦ ¼±ÅÃÇÏ½Ã¸é %s´Ô²² ¾Ë¸Â´Â ¿îµ¿ ·çÆ¾À» ÃßÃµµå¸®°Ú½À´Ï´Ù.\n", name);
+	printf("ê´€ì‹¬ ìˆëŠ” ìš´ë™ ëª©í‘œë¥¼ ì„ íƒí•˜ì‹œë©´ %së‹˜ê»˜ ì•Œë§ëŠ” ìš´ë™ ë£¨í‹´ì„ ì¶”ì²œë“œë¦¬ê² ìŠµë‹ˆë‹¤.\n", name);
 
-	// ¿îµ¿ ¸ñÇ¥ ¸ñ·Ï Ãâ·Â
-	printf("\n¿îµ¿ ¸ñÇ¥¸¦ ¼±ÅÃÇÏ¼¼¿ä.\n");
-	printf("1. ½ÉÆóÁö±¸·Â Çâ»ó\n2. À¯¿¬¼º Çâ»ó\n3. ±ÙÀ°·® Áõ°¡\n4. Ã¼Áö¹æ °¨¼Ò\n");
-	printf("\n¼±ÅÃÇÒ ¿îµ¿ ¸ñÇ¥: ");
-	// ¼±ÅÃ°ª ÀÔ·Â
+	// ìš´ë™ ëª©í‘œ ëª©ë¡ ì¶œë ¥
+	printf("\nìš´ë™ ëª©í‘œë¥¼ ì„ íƒí•˜ì„¸ìš”.\n");
+	printf("1. ì‹¬íì§€êµ¬ë ¥ í–¥ìƒ\n2. ìœ ì—°ì„± í–¥ìƒ\n3. ê·¼ìœ¡ëŸ‰ ì¦ê°€\n4. ì²´ì§€ë°© ê°ì†Œ\n");
+	printf("\nì„ íƒí•  ìš´ë™ ëª©í‘œ: ");
+	// ì„ íƒê°’ ì…ë ¥
 	c = scanf("%d", &choice);
 
-	// ¿¹¿Ü Ã³¸® - ¼ıÀÚ°¡ ¾Æ´Ñ ÀÔ·Â È¤Àº ¼±ÅÃÁö¿¡ ¾ø´Â ¼ıÀÚ ÀÔ·Â ½Ã
+	// ì˜ˆì™¸ ì²˜ë¦¬ - ìˆ«ìê°€ ì•„ë‹Œ ì…ë ¥ í˜¹ì€ ì„ íƒì§€ì— ì—†ëŠ” ìˆ«ì ì…ë ¥ ì‹œ
 
 	if (c != 1 || choice < 1 || choice > 4) {
 
-		// °æ°í¹® Ãâ·Â ÈÄ Ã³À½ºÎÅÍ ´Ù½Ã ½ÇÇà
-		printf(":::¿Ã¹Ù¸¥ °ªÀ» ÀÔ·ÂÇÏ¼¼¿ä:::\n");
-		while ((c = getchar()) != '\n' && c != EOF);  // Àß¸øµÈ ÀÔ·Â°ª ºñ¿öÁÖ±â
-		daily_routine(name);  // Àç±Í È£Ãâ (daily_routine ÇÔ¼ö Ã³À½ºÎÅÍ ´Ù½Ã ½ÇÇà)
+		// ê²½ê³ ë¬¸ ì¶œë ¥ í›„ ì²˜ìŒë¶€í„° ë‹¤ì‹œ ì‹¤í–‰
+		printf(":::ì˜¬ë°”ë¥¸ ê°’ì„ ì…ë ¥í•˜ì„¸ìš”:::\n");
+		while ((c = getchar()) != '\n' && c != EOF);  // ì˜ëª»ëœ ì…ë ¥ê°’ ë¹„ì›Œì£¼ê¸°
+		daily_routine(name);  // ì¬ê·€ í˜¸ì¶œ (daily_routine í•¨ìˆ˜ ì²˜ìŒë¶€í„° ë‹¤ì‹œ ì‹¤í–‰)
 	}
-	// ÀÔ·Â¹ŞÀº ¼±ÅÃ°ª¿¡ µû¶ó ÇØ´ç ¹øÈ£ÀÇ ¿îµ¿ Ãâ·Â
+	// ì…ë ¥ë°›ì€ ì„ íƒê°’ì— ë”°ë¼ í•´ë‹¹ ë²ˆí˜¸ì˜ ìš´ë™ ì¶œë ¥
 	switch (choice)
 	{
-	case 1: // ½ÉÆó Áö±¸·Â Çâ»ó
+	case 1: // ì‹¬í ì§€êµ¬ë ¥ í–¥ìƒ
 		printf("\n*******************\n");
-		printf("\n[½ÉÆó Áö±¸·Â Çâ»ó]À» ¸ñÇ¥·Î ¼³Á¤ÇÏ¼Ì½À´Ï´Ù.\n");
-		printf("¾Æ·¡ ¿îµ¿µé Áß ¿øÇÏ´Â ¿îµ¿ÀÇ ¹øÈ£¸¦ ¼±ÅÃÇÏ¼¼¿ä.\n");
-		printf("1: °È±â \n2: µî»ê \n3: ÁÙ³Ñ±â \n4: ¹èµå¹ÎÅÏ \n5: °è´Ü ¿À¸£±â \n6: ÀÎÅÍ¹ú Æ®·¹ÀÌ´× \n");
-		printf("\n¼±ÅÃÇÒ ¿îµ¿: ");
+		printf("\n[ì‹¬í ì§€êµ¬ë ¥ í–¥ìƒ]ì„ ëª©í‘œë¡œ ì„¤ì •í•˜ì…¨ìŠµë‹ˆë‹¤.\n");
+		printf("ì•„ë˜ ìš´ë™ë“¤ ì¤‘ ì›í•˜ëŠ” ìš´ë™ì˜ ë²ˆí˜¸ë¥¼ ì„ íƒí•˜ì„¸ìš”.\n");
+		printf("1: ê±·ê¸° \n2: ë“±ì‚° \n3: ì¤„ë„˜ê¸° \n4: ë°°ë“œë¯¼í„´ \n5: ê³„ë‹¨ ì˜¤ë¥´ê¸° \n6: ì¸í„°ë²Œ íŠ¸ë ˆì´ë‹ \n");
+		printf("\nì„ íƒí•  ìš´ë™: ");
 		scanf("%d", &choice1);
-		// ¿øÇÏ´Â ¿îµ¿ ¹øÈ£¿¡ µû¶ó ¿îµ¿ ¼³¸í Ãâ·Â
+		// ì›í•˜ëŠ” ìš´ë™ ë²ˆí˜¸ì— ë”°ë¼ ìš´ë™ ì„¤ëª… ì¶œë ¥
 		switch (choice1)
 		{
 		case 1:
-			strcpy(exercise_name, "°È±â");
-			strcpy(descr, "¹Û¿¡¼­ °È°Å³ª, ½Ç³»¿¡¼­ Æ®·¹µå¹ĞÀ» ÀÌ¿ëÇØ¼­ °É¾îº¾½Ã´Ù.");
-			strcpy(time, "30ºĞ ÀÌ»ó");
-			// »ó¼¼ ¼³¸í
-			strcpy(level, "ÇÏ");
+			strcpy(exercise_name, "ê±·ê¸°");
+			strcpy(descr, "ë°–ì—ì„œ ê±·ê±°ë‚˜, ì‹¤ë‚´ì—ì„œ íŠ¸ë ˆë“œë°€ì„ ì´ìš©í•´ì„œ ê±¸ì–´ë´…ì‹œë‹¤.");
+			strcpy(time, "30ë¶„ ì´ìƒ");
+			// ìƒì„¸ ì„¤ëª…
+			strcpy(level, "í•˜");
 			cal = 110;
-			strcpy(url, "¿îµ¿ È¿°ú¸¦ ³ôÀÌ±â À§ÇØ ¹Ù¸£°Ô °È´Â ¹æ¹ı\n	   https://youtu.be/rVoB0heVow0?si=QsUqPhefBghZ_jDy");
+			flex = 0;
+			strcpy(url, "ìš´ë™ íš¨ê³¼ë¥¼ ë†’ì´ê¸° ìœ„í•´ ë°”ë¥´ê²Œ ê±·ëŠ” ë°©ë²•\n	   https://youtu.be/rVoB0heVow0?si=QsUqPhefBghZ_jDy");
 
-			exercise_details(exercise_name, descr, time, level, cal, url);
+			exercise_details(exercise_name, descr, time, level, cal, url, flex);
 			break;
 		case 2:
-			strcpy(exercise_name, "µî»ê");
-			strcpy(descr, "±ÙÃ³ »ê, »ê¸², È¤Àº µî»ê·Î¸¦ Ã£¾Æ µî»êÈ­¿Í ÆíÇÑ ¿ÊÀ» ÀÔ°í »êÀ» ¿À¸£¼¼¿ä.");
-			strcpy(time, "30ºĞ ~ 2½Ã°£ ÀÌ»ó");
-			// »ó¼¼ ¼³¸í
-			strcpy(level, "Áß");
+			strcpy(exercise_name, "ë“±ì‚°");
+			strcpy(descr, "ê·¼ì²˜ ì‚°, ì‚°ë¦¼, í˜¹ì€ ë“±ì‚°ë¡œë¥¼ ì°¾ì•„ ë“±ì‚°í™”ì™€ í¸í•œ ì˜·ì„ ì…ê³  ì‚°ì„ ì˜¤ë¥´ì„¸ìš”.");
+			strcpy(time, "30ë¶„ ~ 2ì‹œê°„ ì´ìƒ");
+			// ìƒì„¸ ì„¤ëª…
+			strcpy(level, "ì¤‘");
 			cal = 204;
-			strcpy(url, "µî»êÇÒ ¶§ ¿Ã¹Ù¸¥ º¸Çà¹ı\n	   https://youtu.be/NTEaUa8SSpM?si=maVK23YRfzmlr1b-");
+			flex = 0;
+			strcpy(url, "ë“±ì‚°í•  ë•Œ ì˜¬ë°”ë¥¸ ë³´í–‰ë²•\n	   https://youtu.be/NTEaUa8SSpM?si=maVK23YRfzmlr1b-");
 
-			exercise_details(exercise_name, descr, time, level, cal, url);
+			exercise_details(exercise_name, descr, time, level, cal, url, flex);
 			break;
 		case 3:
-			strcpy(exercise_name, "ÁÙ³Ñ±â");
-			strcpy(descr, "ÁÙÀ» °¡Áö°í ¾çÂÊ ¼ÕÀ¸·Î ¼ÕÀâÀÌ¸¦ Àâ°í, ¹ßÀ» Á¶±İ µé¾î¿Ã·Á ÁÙÀ» ³Ñ¾î ¶Ù¾î ³Ñ±â¼¼¿ä.");
-			strcpy(time, "30ºĞ~1½Ã°£");
-			// »ó¼¼ ¼³¸í
-			strcpy(level, "Áß");
+			strcpy(exercise_name, "ì¤„ë„˜ê¸°");
+			strcpy(descr, "ì¤„ì„ ê°€ì§€ê³  ì–‘ìª½ ì†ìœ¼ë¡œ ì†ì¡ì´ë¥¼ ì¡ê³ , ë°œì„ ì¡°ê¸ˆ ë“¤ì–´ì˜¬ë ¤ ì¤„ì„ ë„˜ì–´ ë›°ì–´ ë„˜ê¸°ì„¸ìš”.");
+			strcpy(time, "30ë¶„~1ì‹œê°„");
+			// ìƒì„¸ ì„¤ëª…
+			strcpy(level, "ì¤‘");
 			cal = 371;
-			strcpy(url, "ÁÙ³Ñ±â ÃÊº¸ÀÚ¸¦ À§ÇÑ °£´ÜÇÑ ¼³¸í\n	   https://youtu.be/_yWerNDS2AQ?si=KbnH8guZX_JJ0Oa1");
+			flex = 0;
+			strcpy(url, "ì¤„ë„˜ê¸° ì´ˆë³´ìë¥¼ ìœ„í•œ ê°„ë‹¨í•œ ì„¤ëª…\n	   https://youtu.be/_yWerNDS2AQ?si=KbnH8guZX_JJ0Oa1");
 
-			exercise_details(exercise_name, descr, time, level, cal, url);
+			exercise_details(exercise_name, descr, time, level, cal, url, flex);
 			break;
 		case 4:
-			strcpy(exercise_name, "¹èµå¹ÎÅÏ");
-			strcpy(descr, "ºü¸¥ ¼Óµµ·Î ÀÌµ¿ÇÏ¸é¼­ ¶óÄÏÀ¸·Î ¼ÅÆ²ÄÛÀ» Ä¡¼¼¿ä. »ó´ë¹æ°ú °ÔÀÓÀ» ÇÑ´Ù¸é, ¼­·Î ¼ÅÆ²ÄÛÀ» ¶óÄÏÀ¸·Î ÁÖ°í ¹ŞÀ» ¼ö ÀÖ½À´Ï´Ù.");
-			strcpy(time, "1½Ã°£ ÀÌ»ó");
-			// »ó¼¼ ¼³¸í
-			strcpy(level, "Áß");
+			strcpy(exercise_name, "ë°°ë“œë¯¼í„´");
+			strcpy(descr, "ë¹ ë¥¸ ì†ë„ë¡œ ì´ë™í•˜ë©´ì„œ ë¼ì¼“ìœ¼ë¡œ ì…”í‹€ì½•ì„ ì¹˜ì„¸ìš”. ìƒëŒ€ë°©ê³¼ ê²Œì„ì„ í•œë‹¤ë©´, ì„œë¡œ ì…”í‹€ì½•ì„ ë¼ì¼“ìœ¼ë¡œ ì£¼ê³  ë°›ì„ ìˆ˜ ìˆìŠµë‹ˆë‹¤.");
+			strcpy(time, "1ì‹œê°„ ì´ìƒ");
+			// ìƒì„¸ ì„¤ëª…
+			strcpy(level, "ì¤‘");
 			cal = 246;
-			strcpy(url, "¹èµå¹ÎÅÏ ÀÔ¹®ÀÚ¿ë ±âÃÊ ¼³¸í\n	   https://youtu.be/giXK9YAeJEI?si=nKTfS_rM72A3MSHe");
+			flex = 0;
+			strcpy(url, "ë°°ë“œë¯¼í„´ ì…ë¬¸ììš© ê¸°ì´ˆ ì„¤ëª…\n	   https://youtu.be/giXK9YAeJEI?si=nKTfS_rM72A3MSHe");
 
-			exercise_details(exercise_name, descr, time, level, cal, url);
+			exercise_details(exercise_name, descr, time, level, cal, url, flex);
 		case 5:
-			strcpy(exercise_name, "°è´Ü ¿À¸£±â");
-			strcpy(descr, "°Ç¹° ³»ºÎ ¶Ç´Â ¾ß¿ÜÀÇ °è´ÜÀ» ¿À¸£³»¸®±â¸¦ ¹İº¹ÇÏ¼¼¿ä.");
-			strcpy(time, "30ºĞ ÀÌ»ó");
-			// »ó¼¼ ¼³¸í
-			strcpy(level, "ÇÏ");
+			strcpy(exercise_name, "ê³„ë‹¨ ì˜¤ë¥´ê¸°");
+			strcpy(descr, "ê±´ë¬¼ ë‚´ë¶€ ë˜ëŠ” ì•¼ì™¸ì˜ ê³„ë‹¨ì„ ì˜¤ë¥´ë‚´ë¦¬ê¸°ë¥¼ ë°˜ë³µí•˜ì„¸ìš”.");
+			strcpy(time, "30ë¶„ ì´ìƒ");
+			// ìƒì„¸ ì„¤ëª…
+			strcpy(level, "í•˜");
 			cal = 261;
-			strcpy(url, "È¿°úÀûÀ¸·Î °è´Ü¿À¸£±â ¿îµ¿ ÇÏ´Â ¹æ¹ı\n	   https://youtu.be/5K_-Bz9VfHw?si=QPudFsNtw9pQxmgs");
+			flex = 0;
+			strcpy(url, "íš¨ê³¼ì ìœ¼ë¡œ ê³„ë‹¨ì˜¤ë¥´ê¸° ìš´ë™ í•˜ëŠ” ë°©ë²•\n	   https://youtu.be/5K_-Bz9VfHw?si=QPudFsNtw9pQxmgs");
 
-			exercise_details(exercise_name, descr, time, level, cal, url);
+			exercise_details(exercise_name, descr, time, level, cal, url, flex);
 			break;
 		case 6:
-			strcpy(exercise_name, "ÀÎÅÍ¹ú Æ®·¹ÀÌ´×");
-			strcpy(descr, "5ºĞÀÇ ¿ö¹Ö¾÷ ÈÄ 8~10ÀÇ ¼Óµµ·Î 3ºĞ°£ ´Ş¸³´Ï´Ù. ±× ÈÄ 5~6ÀÇ ¼Óµµ·Î 2ºĞ°£ °È½À´Ï´Ù. ÇØ´ç ·çÆ¾À» 30ºĞµ¿¾È ¹İº¹ÇÑ ÈÄ Äğ ´Ù¿îÀÌ µé¾î°¡ 5~10ºĞ°£ ÃµÃµÈ÷ °È½À´Ï´Ù. \nÀÚ½ÅÀÇ Ã¼·Â ¼öÁØ¿¡ µû¶ó ¼Óµµ¿Í ½Ã°£À» Á¶ÀıÇÏ¿© ¼öÇàÇÕ½Ã´Ù.");
-			strcpy(time, "30ºĞ ÀÌ»ó");
-			// »ó¼¼ ¼³¸í
-			strcpy(level, "Áß");
+			strcpy(exercise_name, "ì¸í„°ë²Œ íŠ¸ë ˆì´ë‹");
+			strcpy(descr, "5ë¶„ì˜ ì›Œë°ì—… í›„ 8~10ì˜ ì†ë„ë¡œ 3ë¶„ê°„ ë‹¬ë¦½ë‹ˆë‹¤. ê·¸ í›„ 5~6ì˜ ì†ë„ë¡œ 2ë¶„ê°„ ê±·ìŠµë‹ˆë‹¤. í•´ë‹¹ ë£¨í‹´ì„ 30ë¶„ë™ì•ˆ ë°˜ë³µí•œ í›„ ì¿¨ ë‹¤ìš´ì´ ë“¤ì–´ê°€ 5~10ë¶„ê°„ ì²œì²œíˆ ê±·ìŠµë‹ˆë‹¤. \nìì‹ ì˜ ì²´ë ¥ ìˆ˜ì¤€ì— ë”°ë¼ ì†ë„ì™€ ì‹œê°„ì„ ì¡°ì ˆí•˜ì—¬ ìˆ˜í–‰í•©ì‹œë‹¤.");
+			strcpy(time, "30ë¶„ ì´ìƒ");
+			// ìƒì„¸ ì„¤ëª…
+			strcpy(level, "ì¤‘");
 			cal = 157;
-			strcpy(url, "ÀÎÅÍ¹úÆ®·¹ÀÌ´×ÀÇ ¹æ¹ı°ú È¿°ú\n	   https://youtu.be/RKcfpPNlMvE?si=z6nWkIUmKrZNBclu");
+			flex = 0;
+			strcpy(url, "ì¸í„°ë²ŒíŠ¸ë ˆì´ë‹ì˜ ë°©ë²•ê³¼ íš¨ê³¼\n	   https://youtu.be/RKcfpPNlMvE?si=z6nWkIUmKrZNBclu");
 
-			exercise_details(exercise_name, descr, time, level, cal, url);
+			exercise_details(exercise_name, descr, time, level, cal, url, flex);
 			break;
 		}
 		break;
-	case 2: //À¯¿¬¼º Çâ»ó
+	case 2: //ìœ ì—°ì„± í–¥ìƒ
 		printf("\n*******************\n");
-		printf("\n[À¯¿¬¼º Çâ»ó]À» ¸ñÇ¥·Î ¼³Á¤ÇÏ¼Ì½À´Ï´Ù.\n");
-		printf("¾Æ·¡ ¿îµ¿µé Áß ¿øÇÏ´Â ¿îµ¿ÀÇ ¹øÈ£¸¦ ¼±ÅÃÇÏ¼¼¿ä.\n");
-		printf("1.¹İ´Ş ÀÚ¼¼ \n2: µ¶¼ö¸® ÀÚ¼¼ \n3: ³ª¹« ÀÚ¼¼ \n4:ÇÊ¶óÅ×½º \n5: ´Ù¸® Âõ±â");
-		printf("\n¼±ÅÃÇÒ ¿îµ¿: ");
+		printf("\n[ìœ ì—°ì„± í–¥ìƒ]ì„ ëª©í‘œë¡œ ì„¤ì •í•˜ì…¨ìŠµë‹ˆë‹¤.\n");
+		printf("ì•„ë˜ ìš´ë™ë“¤ ì¤‘ ì›í•˜ëŠ” ìš´ë™ì˜ ë²ˆí˜¸ë¥¼ ì„ íƒí•˜ì„¸ìš”.\n");
+		printf("1.ë°˜ë‹¬ ìì„¸ \n2: ë…ìˆ˜ë¦¬ ìì„¸ \n3: ë‚˜ë¬´ ìì„¸ \n4:í•„ë¼í…ŒìŠ¤ \n5: ë‹¤ë¦¬ ì°¢ê¸°");
+		printf("\nì„ íƒí•  ìš´ë™: ");
 		scanf("%d", &choice2);
 		switch (choice2)
 		{
 		case 1:
-			strcpy(exercise_name, "¹İ´Ş ÀÚ¼¼");
-			strcpy(descr, "¸öÀ» ÇÑ ÂÊÀ¸·Î ±â¿ï¿© ÇÏ³ªÀÇ ¼ÕÀ» ¹Ù´Ú¿¡ ³õ°í ´Ù¸¥ ÆÈÀ» ÃµÀå ÂÊÀ¸·Î »¸¾î¼­ À¯ÁöÇÏ´Ù°¡ ¹æÇâÀ» ¹Ù²ß½Ã´Ù.");
-			strcpy(time, "30ÃÊ ~ 1ºĞ");
-			// »ó¼¼ ¼³¸í
-			strcpy(level, "ÇÏ");
+			strcpy(exercise_name, "ë°˜ë‹¬ ìì„¸");
+			strcpy(descr, "ëª¸ì„ í•œ ìª½ìœ¼ë¡œ ê¸°ìš¸ì—¬ í•˜ë‚˜ì˜ ì†ì„ ë°”ë‹¥ì— ë†“ê³  ë‹¤ë¥¸ íŒ”ì„ ì²œì¥ ìª½ìœ¼ë¡œ ë»—ì–´ì„œ ìœ ì§€í•˜ë‹¤ê°€ ë°©í–¥ì„ ë°”ê¿‰ì‹œë‹¤.");
+			strcpy(time, "30ì´ˆ ~ 1ë¶„");
+			// ìƒì„¸ ì„¤ëª…
+			strcpy(level, "í•˜");
 			cal = 30;
-			strcpy(url, "¹İ´ŞÀÚ¼¼ ÇÏ´Â ¹æ¹ı\n	   https://youtu.be/E93q2CDmp14?si=O0PUMTEwNRqx9RbS");
+			flex = 1;
+			strcpy(url, "ë°˜ë‹¬ìì„¸ í•˜ëŠ” ë°©ë²•\n	   https://youtu.be/E93q2CDmp14?si=O0PUMTEwNRqx9RbS");
 
-			exercise_details(exercise_name, descr, time, level, cal, url);
+			exercise_details(exercise_name, descr, time, level, cal, url, flex);
 			break;
 		case 2:
-			strcpy(exercise_name, "µ¶¼ö¸® ÀÚ¼¼");
-			strcpy(descr, "¿À¸¥ÆÈÀ» ¿ŞÆÈ ¹ØÀ¸·Î ÇØ ÆÈ²ŞÄ¡¸¦ ±³Â÷ÇÏ°í ¾ç ¼Õ¹Ù´ÚÀÌ ¸Â´êµµ·Ï ÇÕ´Ï´Ù. \n¿À¸¥ÂÊ ´Ù¸®¸¦ ºñÆ²°í ¿À¸¥¹ßÀ» ¿ŞÂÊ Á¾¾Æ¸®¿¡ °ÉÄ£ »óÅÂ·Î À¯ÁöÇÏ´Ù°¡ ¹æÇâÀ» ¹Ù²ß½Ã´Ù.");
-			strcpy(time, "30ÃÊ ~ 1ºĞ");
-			// »ó¼¼ ¼³¸í
-			strcpy(level, "ÇÏ");
+			strcpy(exercise_name, "ë…ìˆ˜ë¦¬ ìì„¸");
+			strcpy(descr, "ì˜¤ë¥¸íŒ”ì„ ì™¼íŒ” ë°‘ìœ¼ë¡œ í•´ íŒ”ê¿ˆì¹˜ë¥¼ êµì°¨í•˜ê³  ì–‘ ì†ë°”ë‹¥ì´ ë§ë‹¿ë„ë¡ í•©ë‹ˆë‹¤. \nì˜¤ë¥¸ìª½ ë‹¤ë¦¬ë¥¼ ë¹„í‹€ê³  ì˜¤ë¥¸ë°œì„ ì™¼ìª½ ì¢…ì•„ë¦¬ì— ê±¸ì¹œ ìƒíƒœë¡œ ìœ ì§€í•˜ë‹¤ê°€ ë°©í–¥ì„ ë°”ê¿‰ì‹œë‹¤.");
+			strcpy(time, "30ì´ˆ ~ 1ë¶„");
+			// ìƒì„¸ ì„¤ëª…
+			strcpy(level, "í•˜");
 			cal = 30;
-			strcpy(url, "µ¶¼ö¸®ÀÚ¼¼ ÇÏ´Â ¹æ¹ı\n		https://youtu.be/0yVcCuc_uGE?si=iWOupRitjG_7uKSP");
+			flex = 1;
+			strcpy(url, "ë…ìˆ˜ë¦¬ìì„¸ í•˜ëŠ” ë°©ë²•\n		https://youtu.be/0yVcCuc_uGE?si=iWOupRitjG_7uKSP");
 
-			exercise_details(exercise_name, descr, time, level, cal, url);
+			exercise_details(exercise_name, descr, time, level, cal, url, flex);
 			break;
 
 		case 3:
-			strcpy(exercise_name, "³ª¹« ÀÚ¼¼");
-			strcpy(descr, "ÇÑ ÂÊ ¹ßÀ» ¹İ´ëÂÊ Çã¹÷Áö ¾ÈÂÊ¿¡ ºÙÀÌ°í, µÎ ¼ÕÀº ¸Ó¸® À§·Î ¿Ã·Á ±ïÁö¸¦ ³¤ Ã¤·Î ¼­¼­ ÀÚ¼¼¸¦ À¯ÁöÇÏ´Ù°¡ ¹æÇâÀ» ¹Ù²ß½Ã´Ù.");
-			strcpy(time, "1ºĞ ~ 1ºĞ 30ÃÊ");
-			// »ó¼¼ ¼³¸í
-			strcpy(level, "ÇÏ");
+			strcpy(exercise_name, "ë‚˜ë¬´ ìì„¸");
+			strcpy(descr, "í•œ ìª½ ë°œì„ ë°˜ëŒ€ìª½ í—ˆë²…ì§€ ì•ˆìª½ì— ë¶™ì´ê³ , ë‘ ì†ì€ ë¨¸ë¦¬ ìœ„ë¡œ ì˜¬ë ¤ ê¹ì§€ë¥¼ ë‚€ ì±„ë¡œ ì„œì„œ ìì„¸ë¥¼ ìœ ì§€í•˜ë‹¤ê°€ ë°©í–¥ì„ ë°”ê¿‰ì‹œë‹¤.");
+			strcpy(time, "1ë¶„ ~ 1ë¶„ 30ì´ˆ");
+			// ìƒì„¸ ì„¤ëª…
+			strcpy(level, "í•˜");
 			cal = 30;
-			strcpy(url, "³ª¹«ÀÚ¼¼ ÇÏ´Â ¹æ¹ı\n	   https://youtu.be/TptsloulelU?si=EyVohJpO7mhmq-H2");
+			flex = 1;
+			strcpy(url, "ë‚˜ë¬´ìì„¸ í•˜ëŠ” ë°©ë²•\n	   https://youtu.be/TptsloulelU?si=EyVohJpO7mhmq-H2");
 
-			exercise_details(exercise_name, descr, time, level, cal, url);
+			exercise_details(exercise_name, descr, time, level, cal, url, flex);
 			break;
 		case 4:
-			strcpy(exercise_name, "ÇÊ¶óÅ×½º");
-			strcpy(descr, "ÇÊ¶óÅ×½º ¸ÅÆ®¸¦ »ç¿ëÇÏ¿© ´Ù¾çÇÑ µ¿ÀÛÀ» ¼öÇàÇÏ°Å³ª, ÇÊ¶óÅ×½º ±â±¸¸¦ È°¿ëÇÕ½Ã´Ù.");
-			strcpy(time, "30ºĞ ~ 1½Ã°£");
-			// »ó¼¼ ¼³¸í
-			strcpy(level, "Áß");
+			strcpy(exercise_name, "í•„ë¼í…ŒìŠ¤");
+			strcpy(descr, "í•„ë¼í…ŒìŠ¤ ë§¤íŠ¸ë¥¼ ì‚¬ìš©í•˜ì—¬ ë‹¤ì–‘í•œ ë™ì‘ì„ ìˆ˜í–‰í•˜ê±°ë‚˜, í•„ë¼í…ŒìŠ¤ ê¸°êµ¬ë¥¼ í™œìš©í•©ì‹œë‹¤.");
+			strcpy(time, "30ë¶„ ~ 1ì‹œê°„");
+			// ìƒì„¸ ì„¤ëª…
+			strcpy(level, "ì¤‘");
 			cal = 30;
-			strcpy(url, "Áı¿¡¼­ ÇÏ´Â Àü½ÅÇÊ¶óÅ×½º 20°¡Áö µ¿ÀÛ\n	   https://youtu.be/L5QnCr_vdJE?si=miiZhZyb5_M2xbc3");
+			flex = 1;
+			strcpy(url, "ì§‘ì—ì„œ í•˜ëŠ” ì „ì‹ í•„ë¼í…ŒìŠ¤ 20ê°€ì§€ ë™ì‘\n	   https://youtu.be/L5QnCr_vdJE?si=miiZhZyb5_M2xbc3");
 
-			exercise_details(exercise_name, descr, time, level, cal, url);
+			exercise_details(exercise_name, descr, time, level, cal, url, flex);
 			break;
 		case 5:
-			strcpy(exercise_name, "´Ù¸® Âõ±â");
-			strcpy(descr, "´Ù¸®¸¦ ¾ÕÀ¸·Î »¸°í ÀÖ´Ù°¡ ÃµÃµÈ÷ ÁÂ¿ì·Î ¹ú¸³´Ï´Ù.");
-			strcpy(time, "30ÃÊ ~ 1ºĞ");
-			// »ó¼¼ ¼³¸í
-			strcpy(level, "ÇÏ");
+			strcpy(exercise_name, "ë‹¤ë¦¬ ì°¢ê¸°");
+			strcpy(descr, "ë‹¤ë¦¬ë¥¼ ì•ìœ¼ë¡œ ë»—ê³  ìˆë‹¤ê°€ ì²œì²œíˆ ì¢Œìš°ë¡œ ë²Œë¦½ë‹ˆë‹¤.");
+			strcpy(time, "30ì´ˆ ~ 1ë¶„");
+			// ìƒì„¸ ì„¤ëª…
+			strcpy(level, "í•˜");
 			cal = 30;
-			strcpy(url, "´Ù¸® Âõ±â ´Ã¸®´Â ¹æ¹ı\n	   https://youtu.be/MYdr0deU5N4?si=Ez9h_3KQExrR102M");
+			flex = 1;
+			strcpy(url, "ë‹¤ë¦¬ ì°¢ê¸° ëŠ˜ë¦¬ëŠ” ë°©ë²•\n	   https://youtu.be/MYdr0deU5N4?si=Ez9h_3KQExrR102M");
 
-			exercise_details(exercise_name, descr, time, level, cal, url);
+			exercise_details(exercise_name, descr, time, level, cal, url, flex);
 			break;
 		}
 		break;
-	case 3: //±ÙÀ° Áõ·®
+	case 3: //ê·¼ìœ¡ ì¦ëŸ‰
 		printf("\n*******************\n");
-		printf("\n[±ÙÀ° Áõ·®]À» ¸ñÇ¥·Î ¼³Á¤ÇÏ¼Ì½À´Ï´Ù.\n");
-		printf("¾Æ·¡ ¿îµ¿µé Áß ¿øÇÏ´Â ¿îµ¿ÀÇ ¹øÈ£¸¦ ¼±ÅÃÇÏ¼¼¿ä.\n");
-		printf("1.½ºÄõÆ® \n2.µ¥µå¸®ÇÁÆ® \n3.º¥Ä¡ÇÁ·¹½º \n4.ÆÈ±ÁÇôÆì±â \n5.À­¸ö ÀÏÀ¸Å°±â \n6.Ç®¾÷ \n");
-		printf("\n¿øÇÏ´Â ¿îµ¿: ");
+		printf("\n[ê·¼ìœ¡ ì¦ëŸ‰]ì„ ëª©í‘œë¡œ ì„¤ì •í•˜ì…¨ìŠµë‹ˆë‹¤.\n");
+		printf("ì•„ë˜ ìš´ë™ë“¤ ì¤‘ ì›í•˜ëŠ” ìš´ë™ì˜ ë²ˆí˜¸ë¥¼ ì„ íƒí•˜ì„¸ìš”.\n");
+		printf("1.ìŠ¤ì¿¼íŠ¸ \n2.ë°ë“œë¦¬í”„íŠ¸ \n3.ë²¤ì¹˜í”„ë ˆìŠ¤ \n4.íŒ”êµ½í˜€í´ê¸° \n5.ìœ—ëª¸ ì¼ìœ¼í‚¤ê¸° \n6.í’€ì—… \n");
+		printf("\nì›í•˜ëŠ” ìš´ë™: ");
 		scanf("%d", &choice3);
 		switch (choice3)
 		{
 		case 1:
-			strcpy(exercise_name, "½ºÄõÆ®");
-			strcpy(descr, "¾î±ú ³Êºñ·Î ´Ù¸®¸¦ ¹ú¸° ÈÄ, °ñ¹İ µÚ·Î »©°í ¹«¸­À» ±ÁÈ÷°í, 90µµ °¢µµ¿¡ ÀÌ¸¦ ¶§±îÁö ³»·Á°©´Ï´Ù. ÀÌÈÄ ¾ûµ¢ÀÌ¸¦ À§·Î ¿Ã·Á ÃÊ±â À§Ä¡·Î µ¹¾Æ°©´Ï´Ù.");
-			strcpy(time, "15 ~ 30ºĞ(10~15È¸ ¹İº¹)");
-			// »ó¼¼ ¼³¸í
-			strcpy(level, "Áß");
+			strcpy(exercise_name, "ìŠ¤ì¿¼íŠ¸");
+			strcpy(descr, "ì–´ê¹¨ ë„ˆë¹„ë¡œ ë‹¤ë¦¬ë¥¼ ë²Œë¦° í›„, ê³¨ë°˜ ë’¤ë¡œ ë¹¼ê³  ë¬´ë¦ì„ êµ½íˆê³ , 90ë„ ê°ë„ì— ì´ë¥¼ ë•Œê¹Œì§€ ë‚´ë ¤ê°‘ë‹ˆë‹¤. ì´í›„ ì—‰ë©ì´ë¥¼ ìœ„ë¡œ ì˜¬ë ¤ ì´ˆê¸° ìœ„ì¹˜ë¡œ ëŒì•„ê°‘ë‹ˆë‹¤.");
+			strcpy(time, "15 ~ 30ë¶„(10~15íšŒ ë°˜ë³µ)");
+			// ìƒì„¸ ì„¤ëª…
+			strcpy(level, "ì¤‘");
 			cal = 147;
-			strcpy(url, "½ºÄõÆ® ¿Ã¹Ù¸¥ ÀÚ¼¼ ¹è¿ì±â\n	   https://youtu.be/fy9URmTqNio?si=8MubMXaGBXLmGgB8");
+			flex = 0;
+			strcpy(url, "ìŠ¤ì¿¼íŠ¸ ì˜¬ë°”ë¥¸ ìì„¸ ë°°ìš°ê¸°\n	   https://youtu.be/fy9URmTqNio?si=8MubMXaGBXLmGgB8");
 
-			exercise_details(exercise_name, descr, time, level, cal, url);
+			exercise_details(exercise_name, descr, time, level, cal, url, flex);
 			break;
 		case 2:
-			strcpy(exercise_name, "µ¥µå¸®ÇÁÆ®");
-			strcpy(descr, "¹Ùº§ÀÇ Á¤Áß¾Ó¿¡ ¼­¼­ ¹ßÀ» ¾î±ú ³Êºñ·Î ¹ú¸®°í, ¹Ùº§À» ¾î±ú ³Êºñº¸´Ù »ìÂ¦ ³Ğ°Ô Àâ½À´Ï´Ù. ½Ã¼±Àº ¾Æ·¡ »ç¼±¹æÇâÀ¸·Î ÇÏ°í Çã¸®°¡ ±Á¾îÁöÁö ¾Ê°Ô Æí »óÅÂ·Î ¹Ùº§À» µé¾î¿Ã¸³´Ï´Ù.\nÇÏÃ¼ÀÇ ÈûÀ¸·Î ¹«¸­±îÁö ¹Ùº§À» ¿Ã¸®°í ¹«¸­ À§ºÎÅÍ´Â µîÀÇ ÈûÀ¸·Î µé¾î¿Ã¸³´Ï´Ù.");
-			strcpy(time, "15 ~ 30ºĞ(6~10È¸ ¹İº¹)");
-			// »ó¼¼ ¼³¸í
-			strcpy(level, "Áß");
+			strcpy(exercise_name, "ë°ë“œë¦¬í”„íŠ¸");
+			strcpy(descr, "ë°”ë²¨ì˜ ì •ì¤‘ì•™ì— ì„œì„œ ë°œì„ ì–´ê¹¨ ë„ˆë¹„ë¡œ ë²Œë¦¬ê³ , ë°”ë²¨ì„ ì–´ê¹¨ ë„ˆë¹„ë³´ë‹¤ ì‚´ì§ ë„“ê²Œ ì¡ìŠµë‹ˆë‹¤. ì‹œì„ ì€ ì•„ë˜ ì‚¬ì„ ë°©í–¥ìœ¼ë¡œ í•˜ê³  í—ˆë¦¬ê°€ êµ½ì–´ì§€ì§€ ì•Šê²Œ í¸ ìƒíƒœë¡œ ë°”ë²¨ì„ ë“¤ì–´ì˜¬ë¦½ë‹ˆë‹¤.\ní•˜ì²´ì˜ í˜ìœ¼ë¡œ ë¬´ë¦ê¹Œì§€ ë°”ë²¨ì„ ì˜¬ë¦¬ê³  ë¬´ë¦ ìœ„ë¶€í„°ëŠ” ë“±ì˜ í˜ìœ¼ë¡œ ë“¤ì–´ì˜¬ë¦½ë‹ˆë‹¤.");
+			strcpy(time, "15 ~ 30ë¶„(6~10íšŒ ë°˜ë³µ)");
+			// ìƒì„¸ ì„¤ëª…
+			strcpy(level, "ì¤‘");
 			cal = 100;
-			strcpy(url, "µ¥µå¸®ÇÁÆ® ¿Ã¹Ù¸£°Ô ÇÏ´Â ¹æ¹ı ¹è¿ì±â\n	   https://youtu.be/EBjYQeeBI-0?si=fZ1gasghn-ZRCTge");
+			flex = 0;
+			strcpy(url, "ë°ë“œë¦¬í”„íŠ¸ ì˜¬ë°”ë¥´ê²Œ í•˜ëŠ” ë°©ë²• ë°°ìš°ê¸°\n	   https://youtu.be/EBjYQeeBI-0?si=fZ1gasghn-ZRCTge");
 
-			exercise_details(exercise_name, descr, time, level, cal, url);
+			exercise_details(exercise_name, descr, time, level, cal, url, flex);
 			break;
 		case 3:
-			strcpy(exercise_name, "º¥Ä¡ ÇÁ·¹½º");
-			strcpy(descr, "¹Ì½¬¸ÕÆ® ¹Ùº§ ¶Ç´Â ´ıº§À» »ç¿ëÇÏ¿© °¡½¿À» µé¾î ¿Ã¸®°í ³»¸®´Â µ¿ÀÛÀ» ¹İº¹ÇÕ´Ï´Ù.");
-			strcpy(time, "10 ~ 20ºĞ(8~12È¸ ¹İº¹)");
-			// »ó¼¼ ¼³¸í
-			strcpy(level, "Áß");
+			strcpy(exercise_name, "ë²¤ì¹˜ í”„ë ˆìŠ¤");
+			strcpy(descr, "ë¯¸ì‰¬ë¨¼íŠ¸ ë°”ë²¨ ë˜ëŠ” ë¤ë²¨ì„ ì‚¬ìš©í•˜ì—¬ ê°€ìŠ´ì„ ë“¤ì–´ ì˜¬ë¦¬ê³  ë‚´ë¦¬ëŠ” ë™ì‘ì„ ë°˜ë³µí•©ë‹ˆë‹¤.");
+			strcpy(time, "10 ~ 20ë¶„(8~12íšŒ ë°˜ë³µ)");
+			// ìƒì„¸ ì„¤ëª…
+			strcpy(level, "ì¤‘");
 			cal = 50;
-			strcpy(url, "º¥Ä¡ÇÁ·¹½º ¿Ã¹Ù¸£°Ô ÇÏ´Â ¹æ¹ı ¹è¿ì±â\n	   https://youtu.be/0DsXTSHo3lU?si=_qOT7u-ZiMAYnVP5");
+			flex = 0;
+			strcpy(url, "ë²¤ì¹˜í”„ë ˆìŠ¤ ì˜¬ë°”ë¥´ê²Œ í•˜ëŠ” ë°©ë²• ë°°ìš°ê¸°\n	   https://youtu.be/0DsXTSHo3lU?si=_qOT7u-ZiMAYnVP5");
 
-			exercise_details(exercise_name, descr, time, level, cal, url);
+			exercise_details(exercise_name, descr, time, level, cal, url, flex);
 			break;
 		case 4:
-			strcpy(exercise_name, "ÆÈ±ÁÇôÆì±â");
-			strcpy(descr, "¼ÕÀ» ¾î±ú ³Êºñ·Î ³õ°í ¸öÀ» ¹Ù´Ú°ú ÆòÇàÇÏ°Ô µé¾î¿Ã¸®°í ´Ù½Ã ³»¸®´Â µ¿ÀÛÀ» ¹İº¹ÇÕ´Ï´Ù.");
-			strcpy(time, "10ºĞ (15~20È¸ ¹İº¹)");
-			// »ó¼¼ ¼³¸í
-			strcpy(level, "Áß");
+			strcpy(exercise_name, "íŒ”êµ½í˜€í´ê¸°");
+			strcpy(descr, "ì†ì„ ì–´ê¹¨ ë„ˆë¹„ë¡œ ë†“ê³  ëª¸ì„ ë°”ë‹¥ê³¼ í‰í–‰í•˜ê²Œ ë“¤ì–´ì˜¬ë¦¬ê³  ë‹¤ì‹œ ë‚´ë¦¬ëŠ” ë™ì‘ì„ ë°˜ë³µí•©ë‹ˆë‹¤.");
+			strcpy(time, "10ë¶„ (15~20íšŒ ë°˜ë³µ)");
+			// ìƒì„¸ ì„¤ëª…
+			strcpy(level, "ì¤‘");
 			cal = 49;
-			strcpy(url, "ÆÈ±ÁÇôÆì±â ÀÚ¼¼ ¹× È¿°ú ¹è¿ì±â\n	   https://youtu.be/-_DUjHxgmWk?si=o1ukxpoBJRzOdseA");
+			flex = 0;
+			strcpy(url, "íŒ”êµ½í˜€í´ê¸° ìì„¸ ë° íš¨ê³¼ ë°°ìš°ê¸°\n	   https://youtu.be/-_DUjHxgmWk?si=o1ukxpoBJRzOdseA");
 
-			exercise_details(exercise_name, descr, time, level, cal, url);
+			exercise_details(exercise_name, descr, time, level, cal, url, flex);
 			break;
 		case 5:
-			strcpy(exercise_name, "À­¸ö ÀÏÀ¸Å°±â");
-			strcpy(descr, "µîÀ» ¸ÅÆ®¿¡ ´¯°í ¼ÕÀ» ±Í µÚ¿¡ µÎ°í »óÃ¼¸¦ µé¾î¿Ã·Á ´Ù½Ã ³»·Á³õ´Â µ¿ÀÛÀ» ¹İº¹ÇÕ´Ï´Ù.");
-			strcpy(time, "10ºĞ (15~20È¸ ¹İº¹)");
-			// »ó¼¼ ¼³¸í
-			strcpy(level, "Áß");
+			strcpy(exercise_name, "ìœ—ëª¸ ì¼ìœ¼í‚¤ê¸°");
+			strcpy(descr, "ë“±ì„ ë§¤íŠ¸ì— ëˆ•ê³  ì†ì„ ê·€ ë’¤ì— ë‘ê³  ìƒì²´ë¥¼ ë“¤ì–´ì˜¬ë ¤ ë‹¤ì‹œ ë‚´ë ¤ë†“ëŠ” ë™ì‘ì„ ë°˜ë³µí•©ë‹ˆë‹¤.");
+			strcpy(time, "10ë¶„ (15~20íšŒ ë°˜ë³µ)");
+			// ìƒì„¸ ì„¤ëª…
+			strcpy(level, "ì¤‘");
 			cal = 98;
-			strcpy(url, "À­¸öÀÏÀ¸Å°±â ÅëÁõ ¾øÀÌ ¿Ã¹Ù¸£°Ô ÇÏ´Â ¹æ¹ı ¹è¿ì±â\n	   https://youtu.be/kWKqlIKnIG0?si=X6-hqBvlAK1uLCEY");
+			flex = 0;
+			strcpy(url, "ìœ—ëª¸ì¼ìœ¼í‚¤ê¸° í†µì¦ ì—†ì´ ì˜¬ë°”ë¥´ê²Œ í•˜ëŠ” ë°©ë²• ë°°ìš°ê¸°\n	   https://youtu.be/kWKqlIKnIG0?si=X6-hqBvlAK1uLCEY");
 
-			exercise_details(exercise_name, descr, time, level, cal, url);
+			exercise_details(exercise_name, descr, time, level, cal, url, flex);
 			break;
 		case 6:
-			strcpy(exercise_name, "Ç®¾÷");
-			strcpy(descr, "ÆÈ²ŞÄ¡¸¦ Æí »óÅÂ¿¡¼­ ¾î±ú³Êºñº¸´Ù Á¶±İ ´õ ³Ğ°Ô ¹Ù¸¦ ÀâÀº µÚ °¡½¿Àº ¿­¾î »ìÂ¦ µé¾îÁÖ°í ¾î±ú´Â ³»¸³´Ï´Ù. ±×´ë·Î °¡½¿À» ¹Ù¿¡ ÅÍÄ¡ÇÑ´Ù´Â ´À³¦À¸·Î ´ç°Ü¿Ã¸³´Ï´Ù.\n»óÃ¼ ±Ù·ÂÀÌ ÀûÀº ÆíÀÌ¶ó¸é ¹êµåÀÇ µµ¿òÀ» ¹ŞÀ¾½Ã´Ù.");
-			strcpy(time, "10ºĞ (10~15È¸ ¹İº¹)");
-			// »ó¼¼ ¼³¸í
-			strcpy(level, "Áß");
+			strcpy(exercise_name, "í’€ì—…");
+			strcpy(descr, "íŒ”ê¿ˆì¹˜ë¥¼ í¸ ìƒíƒœì—ì„œ ì–´ê¹¨ë„ˆë¹„ë³´ë‹¤ ì¡°ê¸ˆ ë” ë„“ê²Œ ë°”ë¥¼ ì¡ì€ ë’¤ ê°€ìŠ´ì€ ì—´ì–´ ì‚´ì§ ë“¤ì–´ì£¼ê³  ì–´ê¹¨ëŠ” ë‚´ë¦½ë‹ˆë‹¤. ê·¸ëŒ€ë¡œ ê°€ìŠ´ì„ ë°”ì— í„°ì¹˜í•œë‹¤ëŠ” ëŠë‚Œìœ¼ë¡œ ë‹¹ê²¨ì˜¬ë¦½ë‹ˆë‹¤.\nìƒì²´ ê·¼ë ¥ì´ ì ì€ í¸ì´ë¼ë©´ ë°´ë“œì˜ ë„ì›€ì„ ë°›ìì‹œë‹¤.");
+			strcpy(time, "10ë¶„ (10~15íšŒ ë°˜ë³µ)");
+			// ìƒì„¸ ì„¤ëª…
+			strcpy(level, "ì¤‘");
 			cal = 15;
-			strcpy(url, "Ç®¾÷ ÀÚ¼¼ ¹è¿ì±â\n	   https://youtu.be/nWhS28U6bCY?si=S3j7U4EYrv-XAOcY");
+			flex = 0;
+			strcpy(url, "í’€ì—… ìì„¸ ë°°ìš°ê¸°\n	   https://youtu.be/nWhS28U6bCY?si=S3j7U4EYrv-XAOcY");
 
-			exercise_details(exercise_name, descr, time, level, cal, url);
+			exercise_details(exercise_name, descr, time, level, cal, url, flex);
 			break;
 		}
 		break;
 	case 4:
 		printf("\n*******************\n");
-		printf("\n[Ã¼Áö¹æ °¨¼Ò]¸¦ ¸ñÇ¥·Î ¼³Á¤ÇÏ¼Ì½À´Ï´Ù.\n");
-		printf("¾Æ·¡ ¿îµ¿µé Áß ¿øÇÏ´Â ¿îµ¿ÀÇ ¹øÈ£¸¦ ¼±ÅÃÇÏ¼¼¿ä.\n");
-		printf("1.Á¶±ë \n2.´Ş¸®±â \n3.ÀÚÀü°ÅÅ¸±â \n4.¼ö¿µ \n5.Å©·Î½ºÇÍ \n6.º¹½Ì \n");
-		printf("\n¿øÇÏ´Â ¿îµ¿: ");
+		printf("\n[ì²´ì§€ë°© ê°ì†Œ]ë¥¼ ëª©í‘œë¡œ ì„¤ì •í•˜ì…¨ìŠµë‹ˆë‹¤.\n");
+		printf("ì•„ë˜ ìš´ë™ë“¤ ì¤‘ ì›í•˜ëŠ” ìš´ë™ì˜ ë²ˆí˜¸ë¥¼ ì„ íƒí•˜ì„¸ìš”.\n");
+		printf("1.ì¡°ê¹… \n2.ë‹¬ë¦¬ê¸° \n3.ìì „ê±°íƒ€ê¸° \n4.ìˆ˜ì˜ \n5.í¬ë¡œìŠ¤í• \n6.ë³µì‹± \n");
+		printf("\nì›í•˜ëŠ” ìš´ë™: ");
 		scanf("%d", &choice4);
 		switch (choice4)
 		{
 		case 1:
-			strcpy(exercise_name, "Á¶±ë");
-			strcpy(descr, "½Å¹ßÀ» ½Å°í Æí¾ÈÇÑ ÀÇ·ù¸¦ ÀÔÀº ÈÄ, ¾ß¿Ü³ª Æ®·¢¿¡¼­ ´À±ßÇÑ ¼Óµµ·Î ¶Ù°Å³ª °È´Â °ÍÀ» ¹İº¹ÇÕ´Ï´Ù.");
-			strcpy(time, "30ºĞ ÀÌ»ó");
-			// »ó¼¼ ¼³¸í
-			strcpy(level, "ÇÏ");
+			strcpy(exercise_name, "ì¡°ê¹…");
+			strcpy(descr, "ì‹ ë°œì„ ì‹ ê³  í¸ì•ˆí•œ ì˜ë¥˜ë¥¼ ì…ì€ í›„, ì•¼ì™¸ë‚˜ íŠ¸ë™ì—ì„œ ëŠê¸‹í•œ ì†ë„ë¡œ ë›°ê±°ë‚˜ ê±·ëŠ” ê²ƒì„ ë°˜ë³µí•©ë‹ˆë‹¤.");
+			strcpy(time, "30ë¶„ ì´ìƒ");
+			// ìƒì„¸ ì„¤ëª…
+			strcpy(level, "í•˜");
 			cal = 220;
-			strcpy(url, "¿îµ¿ È¿°ú ³ôÀÌ´Â Á¶±ë ¹æ¹ı\n	   https://youtu.be/4OZKcJ_Ze6E?si=Rdgk6ANeKmPd83Zy");
+			flex = 0;
+			strcpy(url, "ìš´ë™ íš¨ê³¼ ë†’ì´ëŠ” ì¡°ê¹… ë°©ë²•\n	   https://youtu.be/4OZKcJ_Ze6E?si=Rdgk6ANeKmPd83Zy");
 
-			exercise_details(exercise_name, descr, time, level, cal, url);
+			exercise_details(exercise_name, descr, time, level, cal, url, flex);
 			break;
 		case 2:
-			strcpy(exercise_name, "´Ş¸®±â");
-			strcpy(descr, "ÀûÀıÇÑ ½Å¹ßÀ» ½Å°í, °æÁÖ Æ®·¢ÀÌ³ª ÀÚ¿¬ È¯°æ¿¡¼­ ÃÖ´ëÇÑ ºü¸¥ ¼Óµµ·Î ´Ş¸®¼¼¿ä.");
-			strcpy(time, "20ºĞ ÀÌ»ó");
-			// »ó¼¼ ¼³¸í
-			strcpy(level, "Áß");
+			strcpy(exercise_name, "ë‹¬ë¦¬ê¸°");
+			strcpy(descr, "ì ì ˆí•œ ì‹ ë°œì„ ì‹ ê³ , ê²½ì£¼ íŠ¸ë™ì´ë‚˜ ìì—° í™˜ê²½ì—ì„œ ìµœëŒ€í•œ ë¹ ë¥¸ ì†ë„ë¡œ ë‹¬ë¦¬ì„¸ìš”.");
+			strcpy(time, "20ë¶„ ì´ìƒ");
+			// ìƒì„¸ ì„¤ëª…
+			strcpy(level, "ì¤‘");
 			cal = 230;
-			strcpy(url, "È¿À²ÀûÀ¸·Î ´Ş¸± ¼ö ÀÖ´Â ÀÚ¼¼¿Í È£Èí ¹æ¹ı\n	   https://youtu.be/th7Wi9DsmFo?si=eX_XuLisgdLFsY82");
+			flex = 0;
+			strcpy(url, "íš¨ìœ¨ì ìœ¼ë¡œ ë‹¬ë¦´ ìˆ˜ ìˆëŠ” ìì„¸ì™€ í˜¸í¡ ë°©ë²•\n	   https://youtu.be/th7Wi9DsmFo?si=eX_XuLisgdLFsY82");
 
-			exercise_details(exercise_name, descr, time, level, cal, url);
+			exercise_details(exercise_name, descr, time, level, cal, url, flex);
 			break;
 		case 3:
-			strcpy(exercise_name, "ÀÚÀü°ÅÅ¸±â");
-			strcpy(descr, "ÀÚÀü°Å¸¦ Å¸°í µµ·Î, ÀÚÀü°Å µµ·Î, È¤Àº ÀÚÀü°Å Æ®·¹ÀÏÀ» µû¶ó ÀÌµ¿ÇÏ¼¼¿ä.");
-			strcpy(time, "45ºĞ ÀÌ»ó");
-			// »ó¼¼ ¼³¸í
-			strcpy(level, "Áß");
+			strcpy(exercise_name, "ìì „ê±°íƒ€ê¸°");
+			strcpy(descr, "ìì „ê±°ë¥¼ íƒ€ê³  ë„ë¡œ, ìì „ê±° ë„ë¡œ, í˜¹ì€ ìì „ê±° íŠ¸ë ˆì¼ì„ ë”°ë¼ ì´ë™í•˜ì„¸ìš”.");
+			strcpy(time, "45ë¶„ ì´ìƒ");
+			// ìƒì„¸ ì„¤ëª…
+			strcpy(level, "ì¤‘");
 			cal = 366;
-			strcpy(url, "ÀÚÀü°Å Å¸´Â ¹æ¹ı ¹è¿ì±â\n	   https://youtu.be/M9vqn0R9HmE?si=hJxua2LB7Fh-MP-L");
+			flex = 0;
+			strcpy(url, "ìì „ê±° íƒ€ëŠ” ë°©ë²• ë°°ìš°ê¸°\n	   https://youtu.be/M9vqn0R9HmE?si=hJxua2LB7Fh-MP-L");
 
-			exercise_details(exercise_name, descr, time, level, cal, url);
+			exercise_details(exercise_name, descr, time, level, cal, url, flex);
 			break;
 		case 4:
-			strcpy(exercise_name, "¼ö¿µ");
-			strcpy(descr, "¼ö¿µÀåÀÌ³ª ÀÚ¿¬ ¼ö¿µÀå¿¡¼­ ÀÚÀ¯Çü, Á¢¿µ, µî¿¡ ÀûÇÕÇÑ ½ºÆ®·ÎÅ©·Î ¼ö¿µÇÏ¼¼¿ä.");
-			strcpy(time, "30ºĞ ~ 1½Ã°£");
-			// »ó¼¼ ¼³¸í
-			strcpy(level, "Áß");
+			strcpy(exercise_name, "ìˆ˜ì˜");
+			strcpy(descr, "ìˆ˜ì˜ì¥ì´ë‚˜ ìì—° ìˆ˜ì˜ì¥ì—ì„œ ììœ í˜•, ì ‘ì˜, ë“±ì— ì í•©í•œ ìŠ¤íŠ¸ë¡œí¬ë¡œ ìˆ˜ì˜í•˜ì„¸ìš”.");
+			strcpy(time, "30ë¶„ ~ 1ì‹œê°„");
+			// ìƒì„¸ ì„¤ëª…
+			strcpy(level, "ì¤‘");
 			cal = 159;
-			strcpy(url, "¿©·¯ °¡Áö ¼ö¿µ¹ı ¹è¿ì±â\n	   https://youtu.be/7PqEAls1wjE?si=tx4FXGP6qx7CZusA");
+			flex = 0;
+			strcpy(url, "ì—¬ëŸ¬ ê°€ì§€ ìˆ˜ì˜ë²• ë°°ìš°ê¸°\n	   https://youtu.be/7PqEAls1wjE?si=tx4FXGP6qx7CZusA");
 
-			exercise_details(exercise_name, descr, time, level, cal, url);
+			exercise_details(exercise_name, descr, time, level, cal, url, flex);
 			break;
 		case 5:
-			strcpy(exercise_name, "Å©·Î½ºÇÍ");
-			strcpy(descr, "Å©·Î½ºÇÍ ÇÇÆ®´Ï½º ¼¾ÅÍ¿¡¼­ ´Ù¾çÇÑ ¿şÀÌÆ® ¸®ÇÁÆÃ, À¯»ê¼Ò, Ã¼Áß ¿îµ¿À» ¼öÇàÇÏ¼¼¿ä.");
-			strcpy(time, "1½Ã°£ ÀÌ»ó");
-			// »ó¼¼ ¼³¸í
-			strcpy(level, "»ó");
+			strcpy(exercise_name, "í¬ë¡œìŠ¤í•");
+			strcpy(descr, "í¬ë¡œìŠ¤í• í”¼íŠ¸ë‹ˆìŠ¤ ì„¼í„°ì—ì„œ ë‹¤ì–‘í•œ ì›¨ì´íŠ¸ ë¦¬í”„íŒ…, ìœ ì‚°ì†Œ, ì²´ì¤‘ ìš´ë™ì„ ìˆ˜í–‰í•˜ì„¸ìš”.");
+			strcpy(time, "1ì‹œê°„ ì´ìƒ");
+			// ìƒì„¸ ì„¤ëª…
+			strcpy(level, "ìƒ");
 			cal = 270;
-			strcpy(url, "Å©·Î½ºÇÍ ±âº» µ¿ÀÛ ¹è¿ì±â\n	   https://youtu.be/7oGstYEb-_k?si=gYyBOccRRkt03wRP");
+			flex = 0;
+			strcpy(url, "í¬ë¡œìŠ¤í• ê¸°ë³¸ ë™ì‘ ë°°ìš°ê¸°\n	   https://youtu.be/7oGstYEb-_k?si=gYyBOccRRkt03wRP");
 
-			exercise_details(exercise_name, descr, time, level, cal, url);
+			exercise_details(exercise_name, descr, time, level, cal, url, flex);
 			break;
 		case 6:
-			strcpy(exercise_name, "º¹½Ì");
-			strcpy(descr, "º¹½Ì ÇÇÆ®´Ï½º ¼¾ÅÍ¿¡¼­ ÈÆ·ÃÀ» ¹Ş°Å³ª º¹½Ì °¡¹æÀ» »ç¿ëÇÏ¿© ±âº» º¹½Ì ±â¼úÀ» ¿¬½ÀÇÏ¼¼¿ä.");
-			strcpy(time, "30ºĞ ~ 1½Ã°£");
-			// »ó¼¼ ¼³¸í
-			strcpy(level, "»ó");
+			strcpy(exercise_name, "ë³µì‹±");
+			strcpy(descr, "ë³µì‹± í”¼íŠ¸ë‹ˆìŠ¤ ì„¼í„°ì—ì„œ í›ˆë ¨ì„ ë°›ê±°ë‚˜ ë³µì‹± ê°€ë°©ì„ ì‚¬ìš©í•˜ì—¬ ê¸°ë³¸ ë³µì‹± ê¸°ìˆ ì„ ì—°ìŠµí•˜ì„¸ìš”.");
+			strcpy(time, "30ë¶„ ~ 1ì‹œê°„");
+			// ìƒì„¸ ì„¤ëª…
+			strcpy(level, "ìƒ");
 			cal = 245;
-			strcpy(url, "±âº» ¿øÅõ ÇÏ´Â ¹æ¹ı ¹è¿ì±â\n	   https://youtu.be/4THFtd5K5TI?si=rD-dObdshI1DpgJJ");
+			flex = 0;
+			strcpy(url, "ê¸°ë³¸ ì›íˆ¬ í•˜ëŠ” ë°©ë²• ë°°ìš°ê¸°\n	   https://youtu.be/4THFtd5K5TI?si=rD-dObdshI1DpgJJ");
 
-			exercise_details(exercise_name, descr, time, level, cal, url);
+			exercise_details(exercise_name, descr, time, level, cal, url, flex);
 			break;
 		}
 		break;
@@ -337,48 +361,54 @@ void daily_routine(char* name) {
 
 
 	//----------------------------------------------------------
-	//¿À´Ã ³¯Â¥ÀÎÁö È®ÀÎÇÏ±â
+	//ì˜¤ëŠ˜ ë‚ ì§œì¸ì§€ í™•ì¸í•˜ê¸°
 	date = date_to_file_name();
 
 	chosen_routine_save(date, exercise_name);
-	printf("\n\n ¼±ÅÃÇÑ ¿îµ¿Àº : %s ÀÔ´Ï´Ù.\n\n", exercise_name);
+	printf("\n\n ì„ íƒí•œ ìš´ë™ì€ : %s ì…ë‹ˆë‹¤.\n\n", exercise_name);
 
 
 
 
 }
 
-// Ãâ·Â ¾ç½Ä
-void exercise_details(char exercise_name[], char descr[], char time[], char level[], int cal, char url[]) {
-
+// ì¶œë ¥ ì–‘ì‹
+void exercise_details(char exercise_name[], char descr[], char time[], char level[], int cal, char url[], int flex) {
 	printf("\n*******************\n");
-	printf("\n[%s]¿îµ¿À» ¼±ÅÃÇÏ¼Ì½À´Ï´Ù.\n", exercise_name);
-	printf("¼³¸í: %s\n", descr);
-	printf("½Ã°£: %s\n", time);
-	printf("\n***»ó¼¼ ¼³¸í***\n");
-	printf("°­µµ: %s\n", level);
-	printf("¿¹»ó ¼Ò¸ğ Ä®·Î¸®´Â %dkcal ÀÔ´Ï´Ù.\n", cal);
-	printf("Âü°í ¿µ»ó: %s\n", url);
+	printf("\n[%s]ìš´ë™ì„ ì„ íƒí•˜ì…¨ìŠµë‹ˆë‹¤.\n", exercise_name);
+	printf("ì„¤ëª…: %s\n", descr);
+	printf("ì‹œê°„: %s\n", time);
+	printf("\n***ìƒì„¸ ì„¤ëª…***\n");
+	printf("ê°•ë„: %s\n", level);
+	if (flex == 0)
+	{
+		printf("ì˜ˆìƒ ì†Œëª¨ ì¹¼ë¡œë¦¬ëŠ” %dkcal ì…ë‹ˆë‹¤.\n", cal);
+		printf("ì°¸ê³  ì˜ìƒ: %s\n", url);
+	}
+	else if (flex == 1)
+	{
+		printf("ì°¸ê³  ì˜ìƒ: %s\n", url);
+	}
 }
 
 
-// bmi ½ÅÃ¼ Á¤º¸¸¦ ±â·ÏÇÑ ÆÄÀÏ¿¡
-// ¿îµ¿ ½Ã°£°ú ¸¸Á·µµ¸¦ Ãß°¡ÇØ¼­ ±â·ÏÇÏ°íÀÚ ÇÔ.
+// bmi ì‹ ì²´ ì •ë³´ë¥¼ ê¸°ë¡í•œ íŒŒì¼ì—
+// ìš´ë™ ì‹œê°„ê³¼ ë§Œì¡±ë„ë¥¼ ì¶”ê°€í•´ì„œ ê¸°ë¡í•˜ê³ ì í•¨.
 void chosen_routine_save(int date, char* exercise_name) {
 	char filename[20];
 	FILE* fbmi;
 
-	//ÅØ½ºÆ® ÆÄÀÏ ÀÌ¸§ ÁöÁ¤
+	//í…ìŠ¤íŠ¸ íŒŒì¼ ì´ë¦„ ì§€ì •
 	sprintf(filename, "%d.txt", date);
 
 	fbmi = fopen(filename, "a");
 
 
-	//ÅØ½ºÆ® ÆÄÀÏ¿¡ ¿îµ¿ Á¤º¸ ÀúÀå
+	//í…ìŠ¤íŠ¸ íŒŒì¼ì— ìš´ë™ ì •ë³´ ì €ì¥
 	fprintf(fbmi, "%s\n", exercise_name);
 
-	// ÆÄÀÏ ´İ±â
+	// íŒŒì¼ ë‹«ê¸°
 	fclose(fbmi);
 
-	printf("\n\n¿îµ¿ ±â·ÏÀÌ ¼º°øÀûÀ¸·Î ÀúÀåµÇ¾ú½À´Ï´Ù.\n");
+	printf("\n\nìš´ë™ ê¸°ë¡ì´ ì„±ê³µì ìœ¼ë¡œ ì €ì¥ë˜ì—ˆìŠµë‹ˆë‹¤.\n");
 }
