@@ -11,7 +11,7 @@ void daily_routine(char* name) {
 	char time[MAX_STRING_LENGTH];      // 운동 시간
 	char level[MAX_STRING_LENGTH];     // 운동 강도
 	int cal;                           // 예상 소모 칼로리
-	int flex:                          // 운동 목표가 유연성인지 아닌지 판별
+	int flex;                          // 운동 목표가 유연성인지 아닌지 판별
 	char url[MAX_STRING_LENGTH];       // 운동 영상 주소
 
 	printf("\n*******************\n");
